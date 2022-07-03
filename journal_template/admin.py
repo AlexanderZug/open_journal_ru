@@ -10,6 +10,28 @@ class IndexPageAdmin(admin.ModelAdmin):
     )
 
 
+class InformationPageAdmin(admin.ModelAdmin):
+    list_display = (
+        'reader',
+        'authors',
+        'library',
+    )
+
+
+class AboutAdmin(admin.ModelAdmin):
+    list_display = (
+        'journal',
+        'editorial_team',
+        'contact',
+    )
+
+
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = (
+        'category_name',
+    )
+
+
 class ArchiveAdmin(admin.ModelAdmin):
     list_display = (
         'issue_title',
@@ -26,9 +48,19 @@ class ArchiveAdmin(admin.ModelAdmin):
     empty_value_display = '-пусто-'
 
 
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = (
+        'affiliation',
+        'keywords',
+        'summary',
+        'archive',
+    )
+    search_fields = ('author',)
+
+
 admin.site.register(IndexPage, IndexPageAdmin)
-admin.site.register(InformationPage)
-admin.site.register(About)
-admin.site.register(Category)
+admin.site.register(InformationPage, InformationPageAdmin)
+admin.site.register(About, AboutAdmin)
+admin.site.register(Category, CategoryAdmin)
 admin.site.register(Archive, ArchiveAdmin)
-admin.site.register(Article)
+admin.site.register(Article, ArticleAdmin)
