@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from .models import IndexPage, InformationPage
+from .models import IndexPage, InformationPage, About
 
 
 def index(request):
@@ -17,3 +17,11 @@ def information(request):
         'info_page': info_page,
     }
     return render(request, 'info.html', context)
+
+
+def about(request):
+    about_page = About.objects.select_related().all()
+    context = {
+        'about_page': about_page,
+    }
+    return render(request, 'about.html', context)
