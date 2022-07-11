@@ -117,6 +117,3 @@ class Article(models.Model):
     class Meta:
         verbose_name = 'статья'
         verbose_name_plural = 'статьи'
-
-    def __str__(self):
-        return self.archive

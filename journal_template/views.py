@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from .models import About, Archive, IndexPage, InformationPage
+from .models import About, Archive, IndexPage, InformationPage, Article
 
 
 def index(request):
@@ -33,3 +33,11 @@ def archive(request):
         'archive_page': archive_page,
     }
     return render(request, 'archive.html', context)
+
+
+def article(request):
+    article_page = Article.objects.select_related().all()
+    context = {
+        'article_page': article_page,
+    }
+    return render(request, 'article.html', context)

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  </head>
+  <body>
+    {% for article in article_page %}
+      <p class="fs-3">Аффилиация {{ article.affiliation }}</p>
+      <p class="fs-3">Аффилиация {{ article.keywords }}</p>
+      <p class="fs-3">Аффилиация {{ article.summary }}</p>
+      <p class="fs-3">Аффилиация {{ article.archive.author }}</p>
+    {% endfor %}
+  </body>
+</html>
