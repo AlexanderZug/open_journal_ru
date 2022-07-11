@@ -1,15 +1,7 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-      <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
-      <title>{{ cont.title }}</title>
-    </head>
-  <body>
+{% extends 'base.html' %}
+{% block title %} about {% endblock %}
+{% block content %}
     {% for info in info_page %}
       <p class="fs-3">Информация для читателей {{ info.reader }}</p>
     {% endfor %}
-  </body>
-</html>
+{% endblock %}
