@@ -14,8 +14,17 @@
       <p>{{ article.article_title }}</p>
       <p>{{ article.author }}</p>
       <p>{{ article.category }}</p>
-      <img src="{{ article.issue_img.url }}">
-      <p>{{ article.all_issue_pdf }}</p>
+      <img src="{{ article.issue_img.url }}" alt="">
+
+    <div class="">
+        <a role="button"
+            href="{{ article.all_issue_pdf.url }}"
+            download="{{ article.all_issue_pdf.url }}"
+            class="btn btn-light text-dark ml-0">
+            Download attachment
+        </a>
+    </div>
+
     {% endfor %}
   </body>
 </html>
