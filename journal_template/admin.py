@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import IndexPage, InformationPage, About, Archive, Article, Category
+
+from .models import (About, Archive, Article, Category, IndexPage,
+                     InformationPage)
 
 
 class IndexPageAdmin(admin.ModelAdmin):

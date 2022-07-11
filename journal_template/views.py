@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from .models import IndexPage, InformationPage, About, Archive
+from .models import About, Archive, IndexPage, InformationPage
 
 
 def index(request):
