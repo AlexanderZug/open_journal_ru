@@ -25,9 +25,9 @@ class IndexPage(models.Model):
 
 
 class InformationPage(models.Model):
-    reader = models.TextField(verbose_name='читателям',)
-    authors = models.TextField(verbose_name='авторам',)
-    library = models.TextField(verbose_name='библиотекам',)
+    reader = models.TextField(verbose_name='читателям', )
+    authors = models.TextField(verbose_name='авторам', )
+    library = models.TextField(verbose_name='библиотекам', )
 
     class Meta:
         verbose_name = 'страница с информацией'
@@ -35,8 +35,8 @@ class InformationPage(models.Model):
 
 
 class About(models.Model):
-    journal = models.TextField(verbose_name='раздел о журнале',)
-    editorial_team = models.TextField(verbose_name='раздел о редакции',)
+    journal = models.TextField(verbose_name='раздел о журнале', )
+    editorial_team = models.TextField(verbose_name='раздел о редакции', )
     contact = models.CharField(verbose_name='контакты журнала',
                                max_length=300,
                                )
@@ -48,7 +48,7 @@ class About(models.Model):
 
 class Category(models.Model):
     category_name = models.CharField(verbose_name='категории',
-                                     max_length=250,)
+                                     max_length=250, )
 
     class Meta:
         verbose_name = 'категория'
@@ -63,6 +63,9 @@ class Archive(models.Model):
                                    max_length=250,
                                    blank=True,
                                    )
+    issue_number = models.CharField(verbose_name='номер журнала',
+                                    max_length=250,
+                                    )
     issue_img = models.ImageField(verbose_name='фотография номера журнала (опционально)',
                                   upload_to='issue_img/%Y/%m/%d/',
                                   blank=True,
@@ -107,7 +110,7 @@ class Article(models.Model):
     keywords = models.CharField(verbose_name='ключевые слова',
                                 max_length=300,
                                 )
-    summary = models.TextField(verbose_name='аннотация',)
+    summary = models.TextField(verbose_name='аннотация', )
     archive = models.ForeignKey('Archive',
                                 on_delete=models.SET_NULL,
                                 null=True,

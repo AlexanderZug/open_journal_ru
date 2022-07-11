@@ -37,6 +37,7 @@ class CategoryAdmin(admin.ModelAdmin):
 class ArchiveAdmin(admin.ModelAdmin):
     list_display = (
         'issue_title',
+        'issue_number',
         'issue_img',
         'publish_date',
         'all_issue_pdf',
