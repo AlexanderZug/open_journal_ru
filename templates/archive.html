@@ -8,7 +8,9 @@
       <p>{{ article.author }}</p>
       <p>{{ article.category }}</p>
       <p>{{ article.article.id }}</p>
-      <img src="{{ article.issue_img.url }}" alt="">
+      {% if article.issue_img.url %}
+        <img src="{{ article.issue_img.url }}" alt="">
+      {% endif %}
       <div class="">
         <a role="button"
            href="{{ article.all_issue_pdf.url }}"
@@ -23,6 +25,6 @@
          class="btn btn-light text-dark ml-0">
         Скачать статью
       </a>
-{#      <a href="/{{ article.article.get_absolute_url }}/">link</a>#}
+      <a href="{{ article.article.get_absolute_url }}">link</a>
     {% endfor %}
 {% endblock %}

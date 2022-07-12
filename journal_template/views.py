@@ -1,7 +1,5 @@
-from django.shortcuts import render
-
 from .models import About, Archive, IndexPage, InformationPage, Article
-from django.views.generic import ListView
+from django.views.generic import ListView, DeleteView
 
 
 class IndexView(ListView):
@@ -39,9 +37,9 @@ class ArticleView(ListView):
     extra_context = {'title': 'article'}
 
 
-def article_detail(request, slug):
-    article_detail = Article.objects.get(id=slug)
-    context = {
-        'article_detail': article_detail,
-    }
-    return render(request, 'article_detail.html', context)
+class ArticleDetailView(DeleteView):
+    model = Article
+    template_name = 'article_detail.html'
+    slug_field = 'id'
+    context_object_name = 'article_page'
+    extra_context = {'title': 'article_detail'}

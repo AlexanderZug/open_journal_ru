@@ -131,5 +131,5 @@ class Article(models.Model):
     def __str__(self):
         return self.affiliation
 
-    # def get_absolute_url(self):
-    #     return reverse('article_detail', kwargs={'id': self.id})
+    def get_absolute_url(self):
+        return reverse("journal_template:article_detail", kwargs={"slug": self.pk})
