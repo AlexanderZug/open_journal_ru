@@ -41,11 +41,8 @@ class ArchiveAdmin(admin.ModelAdmin):
         'issue_img',
         'publish_date',
         'all_issue_pdf',
-        'article_title',
-        'author',
-        'article_pdf',
         'article',
-        'category',
+
     )
     search_fields = ('author',)
     list_filter = ('publish_date',)
@@ -58,6 +55,10 @@ class ArticleAdmin(admin.ModelAdmin):
         'keywords',
         'summary',
         'archive',
+        'article_title',
+        'author',
+        'article_pdf',
+        'category',
     )
     search_fields = ('author',)
 

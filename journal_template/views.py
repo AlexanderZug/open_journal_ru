@@ -30,13 +30,6 @@ class ArchiveView(ListView):
     extra_context = {'title': 'archive'}
 
 
-class ArticleView(ListView):
-    model = Article
-    template_name = 'article.html'
-    context_object_name = 'article_page'
-    extra_context = {'title': 'article'}
-
-
 class ArticleDetailView(DeleteView):
     model = Article
     template_name = 'article_detail.html'

@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block title %} {{ title }} {% endblock %}
 {% block content %}
+  <p class="mt-5">{{ article_page.author }}</p>
+  <p class="mt-5">{{ article_page.article_title }}</p>
   <p class="mt-5">{{ article_page.keywords }}</p>
   <p class="mt-5">{{ article_page.summary }}</p>
   <p class="mt-5">{{ article_page.affiliation }}</p>
