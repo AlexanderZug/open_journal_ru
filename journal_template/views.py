@@ -1,5 +1,6 @@
-from .models import About, Archive, IndexPage, InformationPage, Article
-from django.views.generic import ListView, DeleteView
+from django.views.generic import DeleteView, ListView
+
+from .models import About, Archive, Article, IndexPage, InformationPage
 
 
 class IndexView(ListView):

@@ -80,7 +80,7 @@ class Archive(models.Model):
                                      blank=True,
                                      )
     article = models.ForeignKey('Article',
-                                verbose_name='статья|автор статьи',
+                                verbose_name='статья|автор статьи (необходимо заполнить)',
                                 on_delete=models.SET_NULL,
                                 null=True,
                                 related_name='articles',
@@ -113,8 +113,9 @@ class Article(models.Model):
                                 )
     summary = models.TextField(verbose_name='аннотация', )
     archive = models.ForeignKey('Archive',
-                                verbose_name='номер журнала',
+                                verbose_name='номер журнала (опционально)',
                                 on_delete=models.SET_NULL,
+                                blank=True,
                                 null=True,
                                 related_name='articles',
                                 )
