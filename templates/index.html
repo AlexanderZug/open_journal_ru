@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %} index {% endblock %}
+{% block title %} {{ title }} {% endblock %}
 {% block content %}
   {% for cont in page_obj %}
     <p class="mt-5 fs-1">{{ cont.title }}</p>

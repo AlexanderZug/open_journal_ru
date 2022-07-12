@@ -44,6 +44,7 @@ class ArchiveAdmin(admin.ModelAdmin):
         'article_title',
         'author',
         'article_pdf',
+        'article',
         'category',
     )
     search_fields = ('author',)

@@ -1,13 +1,15 @@
 from django.urls import path
 
 from . import views
+from .views import IndexView, InformationView, AboutView, ArchiveView, ArticleView
 
 app_name = 'journal_template'
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('info_page/', views.information, name='info'),
-    path('about/', views.about, name='about'),
-    path('archive/', views.archive, name='archive'),
-    path('article/', views.article, name='article'),
+    path('', IndexView.as_view(), name='index'),
+    path('info_page/', InformationView.as_view(), name='info'),
+    path('about/', AboutView.as_view(), name='about'),
+    path('archive/', ArchiveView.as_view(), name='archive'),
+    path('article/', ArticleView.as_view(), name='article'),
+    path('article_detail/<str:slug>/', views.article_detail, name='article_detail'),
 ]

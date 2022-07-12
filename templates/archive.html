@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %} archive {% endblock %}
+{% block title %} {{ title }} {% endblock %}
 {% block content %}
     {% for article in archive_page %}
       <p class="fs-3">{{ article.issue_title }}</p>
@@ -7,6 +7,7 @@
       <p>{{ article.article_title }}</p>
       <p>{{ article.author }}</p>
       <p>{{ article.category }}</p>
+      <p>{{ article.article.id }}</p>
       <img src="{{ article.issue_img.url }}" alt="">
       <div class="">
         <a role="button"
@@ -22,5 +23,6 @@
          class="btn btn-light text-dark ml-0">
         Скачать статью
       </a>
+{#      <a href="/{{ article.article.get_absolute_url }}/">link</a>#}
     {% endfor %}
 {% endblock %}

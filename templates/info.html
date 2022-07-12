@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %} info {% endblock %}
+{% block title %} {{ title }} {% endblock %}
 {% block content %}
     {% for info in info_page %}
       <p class="fs-3">Информация для читателей {{ info.reader }}</p>

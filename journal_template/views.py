@@ -1,43 +1,47 @@
 from django.shortcuts import render
 
 from .models import About, Archive, IndexPage, InformationPage, Article
+from django.views.generic import ListView
 
 
-def index(request):
-    index_list = IndexPage.objects.select_related().all()
+class IndexView(ListView):
+    model = IndexPage
+    template_name = 'index.html'
+    context_object_name = 'page_obj'
+    extra_context = {'title': 'index'}
+
+
+class InformationView(ListView):
+    model = InformationPage
+    template_name = 'info.html'
+    context_object_name = 'info_page'
+    extra_context = {'title': 'info'}
+
+
+class AboutView(ListView):
+    model = About
+    template_name = 'about.html'
+    context_object_name = 'about_page'
+    extra_context = {'title': 'about'}
+
+
+class ArchiveView(ListView):
+    model = Archive
+    template_name = 'archive.html'
+    context_object_name = 'archive_page'
+    extra_context = {'title': 'archive'}
+
+
+class ArticleView(ListView):
+    model = Article
+    template_name = 'article.html'
+    context_object_name = 'article_page'
+    extra_context = {'title': 'article'}
+
+
+def article_detail(request, slug):
+    article_detail = Article.objects.get(id=slug)
     context = {
-        'page_obj': index_list,
+        'article_detail': article_detail,
     }
-    return render(request, 'index.html', context)
-
-
-def information(request):
-    info_page = InformationPage.objects.select_related().all()
-    context = {
-        'info_page': info_page,
-    }
-    return render(request, 'info.html', context)
-
-
-def about(request):
-    about_page = About.objects.select_related().all()
-    context = {
-        'about_page': about_page,
-    }
-    return render(request, 'about.html', context)
-
-
-def archive(request):
-    archive_page = Archive.objects.select_related().all()
-    context = {
-        'archive_page': archive_page,
-    }
-    return render(request, 'archive.html', context)
-
-
-def article(request):
-    article_page = Article.objects.select_related().all()
-    context = {
-        'article_page': article_page,
-    }
-    return render(request, 'article.html', context)
+    return render(request, 'article_detail.html', context)

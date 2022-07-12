@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %} about {% endblock %}
+{% block title %} {{ title }} {% endblock %}
 {% block content %}
     {% for about in about_page %}
       <p class="fs-5">О журнале {{ about.journal }}</p>

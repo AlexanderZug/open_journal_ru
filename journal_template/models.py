@@ -1,5 +1,6 @@
 from colorfield.fields import ColorField
 from django.db import models
+from django.urls import reverse
 
 
 class IndexPage(models.Model):
@@ -87,6 +88,12 @@ class Archive(models.Model):
     article_pdf = models.FileField(verbose_name='pdf-файл статьи',
                                    upload_to='issue_pdf/',
                                    )
+    article = models.ForeignKey('Article',
+                                verbose_name='статья',
+                                on_delete=models.SET_NULL,
+                                null=True,
+                                related_name='articles',
+                                )
     category = models.ForeignKey('Category',
                                  verbose_name='категория (опционально)',
                                  on_delete=models.SET_NULL,
@@ -120,3 +127,9 @@ class Article(models.Model):
     class Meta:
         verbose_name = 'статья'
         verbose_name_plural = 'статьи'
+
+    def __str__(self):
+        return self.affiliation
+
+    # def get_absolute_url(self):
+    #     return reverse('article_detail', kwargs={'id': self.id})
