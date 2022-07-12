@@ -49,7 +49,7 @@ class About(models.Model):
 
 class Category(models.Model):
     category_name = models.CharField(verbose_name='категории',
-                                     max_length=250, )
+                                     max_length=250,)
 
     class Meta:
         verbose_name = 'категория'
@@ -89,7 +89,7 @@ class Archive(models.Model):
                                    upload_to='issue_pdf/',
                                    )
     article = models.ForeignKey('Article',
-                                verbose_name='статья',
+                                verbose_name='статья|автор статьи',
                                 on_delete=models.SET_NULL,
                                 null=True,
                                 related_name='articles',
@@ -129,7 +129,7 @@ class Article(models.Model):
         verbose_name_plural = 'статьи'
 
     def __str__(self):
-        return self.affiliation
+        return '%s | %s' % (self.archive.author, self.archive.article_title)
 
     def get_absolute_url(self):
         return reverse("journal_template:article_detail", kwargs={"slug": self.pk})
