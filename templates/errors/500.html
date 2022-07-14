@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Custom 500{% endblock %}
+{% block content %}
+    <h1>Ошибка сервера. Ты не виноват, это я...</h1>
+    <a href="{% url 'journal_template:index' %}">Давай попробуем еще раз</a>
+{% endblock %}

@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from django.views.generic import DeleteView, ListView
 
 from .models import About, Archive, Article, IndexPage, InformationPage
@@ -38,3 +39,11 @@ class ArticleDetailView(DeleteView):
     slug_field = 'id'
     context_object_name = 'article_page'
     extra_context = {'title': 'article_detail'}
+
+
+def page_not_found(request, exception):
+    return render(request, 'errors/404.html', {'path': request.path}, status=404)
+
+
+def server_error(request):
+    return render(request, 'errors/500.html', status=500)
