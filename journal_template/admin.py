@@ -54,7 +54,6 @@ class ArticleAdmin(admin.ModelAdmin):
         'affiliation',
         'keywords',
         'summary',
-        'archive',
         'article_title',
         'author',
         'article_pdf',

@@ -112,13 +112,6 @@ class Article(models.Model):
                                 max_length=300,
                                 )
     summary = models.TextField(verbose_name='аннотация', )
-    archive = models.ForeignKey('Archive',
-                                verbose_name='номер журнала (опционально)',
-                                on_delete=models.SET_NULL,
-                                blank=True,
-                                null=True,
-                                related_name='articles',
-                                )
     category = models.ForeignKey('Category',
                                  verbose_name='категория (опционально)',
                                  on_delete=models.SET_NULL,
