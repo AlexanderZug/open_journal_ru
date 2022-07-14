@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load cache %}
 {% block title %} {{ title }} {% endblock %}
 {% block content %}
     {% for article in archive_page %}
@@ -8,6 +9,7 @@
       <p>{{ article.article.author }}</p>
       <p>{{ article.article.category }}</p>
       <p>{{ article.article.id }}</p>
+      {% cache 5000 sidebar %}
       {% if article.issue_img %}
         <img src="{{ article.issue_img.url }}" alt="">
       {% endif %}
@@ -27,6 +29,7 @@
          class="btn btn-light text-dark ml-0">
         Скачать статью
       </a>
+      {% endcache %}
       <a href="{{ article.article.get_absolute_url }}">link</a>
     {% endfor %}
 {% endblock %}

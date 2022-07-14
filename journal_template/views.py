@@ -26,6 +26,7 @@ class AboutView(ListView):
 
 class ArchiveView(ListView):
     model = Archive
+    queryset = Archive.objects.select_related('article').all()
     template_name = 'archive.html'
     context_object_name = 'archive_page'
     extra_context = {'title': 'archive'}
