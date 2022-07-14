@@ -1,9 +1,6 @@
 from django.urls import path
 
-from .views import (AboutView,
-                    ArchiveView,
-                    ArticleDetailView,
-                    IndexView,
+from .views import (AboutView, ArchiveView, ArticleDetailView, IndexView,
                     InformationView)
 
 app_name = 'journal_template'
