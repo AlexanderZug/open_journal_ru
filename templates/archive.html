@@ -8,9 +8,10 @@
       <p>{{ article.article.author }}</p>
       <p>{{ article.article.category }}</p>
       <p>{{ article.article.id }}</p>
-      {% if article.issue_img.url %}
+      {% if article.issue_img %}
         <img src="{{ article.issue_img.url }}" alt="">
       {% endif %}
+      {% if article.all_issue_pdf %}
       <div class="">
         <a role="button"
            href="{{ article.all_issue_pdf.url }}"
@@ -19,6 +20,7 @@
           Скачать весь номер
         </a>
       </div>
+      {% endif %}
       <a role="button"
          href="{{ article.article.article_pdf.url }}"
          download="{{ article.article.article_pdf.url }}"
