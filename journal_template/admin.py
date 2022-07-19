@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import (About, Archive, Article, Category, IndexPage,
-                     InformationPage)
+                     InformationPage, ClientContact)
 
 
 class IndexPageAdmin(admin.ModelAdmin):
@@ -49,6 +49,16 @@ class ArchiveAdmin(admin.ModelAdmin):
     empty_value_display = '-пусто-'
 
 
+class ClientContactAdmin(admin.ModelAdmin):
+    list_display = (
+        'name',
+        'surname',
+        'email',
+        'publish_date',
+    )
+    search_fields = ('surname',)
+
+
 class ArticleAdmin(admin.ModelAdmin):
     list_display = (
         'affiliation',
@@ -68,3 +78,4 @@ admin.site.register(About, AboutAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Archive, ArchiveAdmin)
 admin.site.register(Article, ArticleAdmin)
+admin.site.register(ClientContact, ClientContactAdmin)
