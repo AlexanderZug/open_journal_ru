@@ -3,5 +3,6 @@
 {% block content %}
     {% for about in about_page %}
       <p class="fs-5">О журнале {{ about.journal }}</p>
+      <p> {{ about.client_contact.email }} </p>
     {% endfor %}
 {% endblock %}

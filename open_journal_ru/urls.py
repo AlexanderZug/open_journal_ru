@@ -25,8 +25,8 @@ urlpatterns = [
     path('__debug__/', include('debug_toolbar.urls'))
 ]
 
-handler404 = 'journal_template.views.page_not_found'
-handler500 = 'journal_template.views.server_error'
+handler404 = 'core.views.page_not_found'
+handler500 = 'core.views.server_error'
 
 if settings.DEBUG:
     urlpatterns += staticfiles_urlpatterns()

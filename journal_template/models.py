@@ -2,6 +2,8 @@ from colorfield.fields import ColorField
 from django.db import models
 from django.urls import reverse
 
+from core.models import CreatedModel
+
 
 class IndexPage(models.Model):
     title = models.CharField(verbose_name='название журнала',
@@ -53,13 +55,10 @@ class About(models.Model):
         verbose_name_plural = 'о журнале'
 
 
-class ClientContact(models.Model):
+class ClientContact(CreatedModel):
     name = models.CharField(verbose_name='имя', max_length=100)
     surname = models.CharField(verbose_name='фамилия', max_length=150)
     email = models.EmailField(verbose_name='email', max_length=200)
-    publish_date = models.DateField(verbose_name='дата (автоматически)',
-                                    auto_now_add=True,
-                                    )
 
     class Meta:
         verbose_name = 'контакт пользователя'
@@ -81,7 +80,7 @@ class Category(models.Model):
         return self.category_name
 
 
-class Archive(models.Model):
+class Archive(CreatedModel):
     issue_title = models.CharField(verbose_name='заголовок журнала (опционально)',
                                    max_length=250,
                                    blank=True,
@@ -94,9 +93,6 @@ class Archive(models.Model):
                                   blank=True,
                                   null=True,
                                   )
-    publish_date = models.DateField(verbose_name='дата (автоматически)',
-                                    auto_now_add=True,
-                                    )
     all_issue_pdf = models.FileField(verbose_name='номер целиком (опционально)',
                                      upload_to='issue_pdf/',
                                      blank=True,
