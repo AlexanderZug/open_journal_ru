@@ -14,7 +14,6 @@ class IndexView(ListView):
 
 
 class InformationView(CreateView):
-    model = InformationPage
     form_class = ClientContactForm
     template_name = 'info.html'
     extra_context = {'title': 'info'}
