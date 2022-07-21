@@ -9,13 +9,13 @@ class FormTests(TestCase):
         self.form = ClientContactForm()
 
     def test_forms_widget(self):
-        """Тестирование placeholder из класса Meta."""
+        """Test placeholder from class Meta form ClientContactForm."""
         placeholder = self.form.fields['massage'].widget.attrs[
             'placeholder']
         self.assertEqual(placeholder, 'Введите сообщение')
 
     def test_forms_help_text(self):
-        """Тестирование help_text из класса Meta."""
+        """Test help_text from class Meta form ClientContactForm."""
         help_text_forms = self.form
         field_help_text = {
             'name': 'Введите имя.',
