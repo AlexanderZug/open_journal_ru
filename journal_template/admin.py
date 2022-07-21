@@ -55,6 +55,7 @@ class ClientContactAdmin(admin.ModelAdmin):
         'surname',
         'email',
         'publish_date',
+        'massage',
     )
     search_fields = ('surname',)
 

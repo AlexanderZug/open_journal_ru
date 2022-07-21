@@ -43,12 +43,6 @@ class About(models.Model):
     contact = models.CharField(verbose_name='контакты журнала',
                                max_length=300,
                                )
-    client_contact = models.ForeignKey('ClientContact',
-                                       on_delete=models.CASCADE,
-                                       null=True,
-                                       blank=True,
-                                       related_name='articles',
-                                       )
 
     class Meta:
         verbose_name = 'о журнале'
@@ -59,6 +53,7 @@ class ClientContact(CreatedModel):
     name = models.CharField(verbose_name='имя', max_length=100)
     surname = models.CharField(verbose_name='фамилия', max_length=150)
     email = models.EmailField(verbose_name='email', max_length=200)
+    massage = models.TextField(verbose_name='текст сообещния')
 
     class Meta:
         verbose_name = 'контакт пользователя'

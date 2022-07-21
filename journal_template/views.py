@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import DeleteView, ListView
 
-from .models import About, Archive, Article, IndexPage, InformationPage
+from .models import About, Archive, Article, IndexPage, InformationPage, ClientContact
 
 
 class IndexView(ListView):
@@ -16,6 +16,11 @@ class InformationView(ListView):
     template_name = 'info.html'
     context_object_name = 'info_page'
     extra_context = {'title': 'info'}
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['contact'] = ClientContact.objects.all()
+        return context
 
 
 class AboutView(ListView):
