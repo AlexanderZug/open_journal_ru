@@ -1,7 +1,9 @@
-from django.shortcuts import render
-from django.views.generic import DeleteView, ListView
 
-from .models import About, Archive, Article, IndexPage, InformationPage, ClientContact
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, DeleteView, ListView
+
+from .forms import ClientContactForm
+from .models import About, Archive, Article, IndexPage, InformationPage
 
 
 class IndexView(ListView):
@@ -11,15 +13,16 @@ class IndexView(ListView):
     extra_context = {'title': 'index'}
 
 
-class InformationView(ListView):
+class InformationView(CreateView):
     model = InformationPage
+    form_class = ClientContactForm
     template_name = 'info.html'
-    context_object_name = 'info_page'
     extra_context = {'title': 'info'}
+    success_url = reverse_lazy('journal_template:index')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['contact'] = ClientContact.objects.all()
+        context['info_page'] = InformationPage.objects.all()
         return context
 
 

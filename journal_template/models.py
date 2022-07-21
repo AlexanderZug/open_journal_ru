@@ -53,7 +53,7 @@ class ClientContact(CreatedModel):
     name = models.CharField(verbose_name='имя', max_length=100)
     surname = models.CharField(verbose_name='фамилия', max_length=150)
     email = models.EmailField(verbose_name='email', max_length=200)
-    massage = models.TextField(verbose_name='текст сообещния')
+    massage = models.TextField(verbose_name='текст сообщения')
 
     class Meta:
         verbose_name = 'контакт пользователя'
@@ -140,4 +140,4 @@ class Article(models.Model):
         return '%s | %s' % (self.author, self.article_title)
 
     def get_absolute_url(self):
-        return reverse("journal_template:article_detail", kwargs={"slug": self.pk})
+        return reverse('journal_template:article_detail', kwargs={"slug": self.pk})

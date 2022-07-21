@@ -4,7 +4,9 @@
     {% for info in info_page %}
       <p class="fs-3">Информация для читателей {{ info.reader }}</p>
     {% endfor %}
-  {% for client_contact in contact %}
-     <p class="mt-5"> {{ client_contact.email }}</p>
-  {% endfor %}
+    <form method="post" action="{% url 'journal_template:info' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Зарегистрироваться">
+  </form>
 {% endblock %}
