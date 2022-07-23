@@ -49,7 +49,7 @@ class StaticURLTests(TestCase):
         }
 
     def test_urls_exist_at_desired_location(self):
-        """Check urls accuses to gust user."""
+        """Check urls accuses to guest user."""
         for url in self.urls.values():
             with self.subTest(url=url.url):
                 status_code = self.guest_client.get(url.url).status_code
