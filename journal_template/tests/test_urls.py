@@ -15,7 +15,7 @@ class Url(NamedTuple):
     template: str
 
 
-class StaticURLTests(TestCase):
+class URLTests(TestCase):
     def setUp(self):
         self.guest_client = Client()
         self.article_model = Article.objects.create()

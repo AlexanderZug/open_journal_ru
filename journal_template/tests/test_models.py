@@ -11,10 +11,11 @@ class ModelTests(TestCase):
         self.about = About.objects.create()
         self.client_contact = ClientContact.objects.create()
         self.archive = Archive.objects.create()
-        self.article = Article.objects.create()
+        self.article = Article.objects.create(pk=2)
         self.category = Category.objects.create()
 
     def test_index_page_verbose_name(self):
+        """Check verbose_names in IndexPage model."""
         fields_verbose = {
             'title': 'название журнала',
             'head_img': 'титульная фотография (опционально)',
@@ -26,6 +27,7 @@ class ModelTests(TestCase):
                                   expected_value)
 
     def test_info_page_verbose_name(self):
+        """Check verbose_names in InformationPage model."""
         fields_verbose = {
             'reader': 'читателям',
             'authors': 'авторам',
@@ -37,6 +39,7 @@ class ModelTests(TestCase):
                                   expected_value)
 
     def test_about_page_verbose_name(self):
+        """Check verbose_names in About model."""
         fields_verbose = {
             'journal': 'раздел о журнале',
             'editorial_team': 'раздел о редакции',
@@ -48,6 +51,7 @@ class ModelTests(TestCase):
                                   expected_value)
 
     def test_client_contact_verbose_name(self):
+        """Check verbose_names in ClientContact model."""
         fields_verbose = {
             'name': 'имя',
             'surname': 'фамилия',
@@ -60,6 +64,7 @@ class ModelTests(TestCase):
                                   expected_value)
 
     def test_archive_verbose_name(self):
+        """Check verbose_names in Archive model."""
         fields_verbose = {
             'issue_title': 'заголовок журнала (опционально)',
             'issue_number': 'номер журнала',
@@ -73,6 +78,7 @@ class ModelTests(TestCase):
                                   expected_value)
 
     def test_article_verbose_name(self):
+        """Check verbose_names in Article model."""
         fields_verbose = {
             'article_title': 'название статьи',
             'author': 'имя автора',
@@ -88,5 +94,25 @@ class ModelTests(TestCase):
                                   expected_value)
 
     def test_category_verbose_name(self):
+        """Check verbose_name in Category model."""
         verbose = self.category._meta.get_field('category_name').verbose_name
         self.assertEquals(verbose, 'категории')
+
+    def test__str__(self):
+        """Check __str__ in all models."""
+        fields_str = {
+            f'{self.index_model}': f'{self.index_model.title}',
+            f'{self.info_page}': f'{self.info_page.reader}',
+            f'{self.about}': f'{self.about.journal}',
+            f'{self.client_contact}': f'{self.client_contact.surname}',
+            f'{self.archive}': f'{self.archive.issue_title}',
+            f'{self.article}': f'{"%s | %s" % (self.article.author, self.article.article_title)}',
+            f'{self.category}': f'{self.category.category_name}',
+        }
+        for field, expected_object_name in fields_str.items():
+            with self.subTest(field=field):
+                self.assertEquals(expected_object_name, str(field))
+
+    def test_get_absolute_url_article(self):
+        """Check get_absolute_url in Article model."""
+        self.assertEquals(self.article.get_absolute_url(), '/article_detail/2/')

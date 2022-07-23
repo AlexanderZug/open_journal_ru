@@ -36,6 +36,9 @@ class InformationPage(models.Model):
         verbose_name = 'страница с информацией'
         verbose_name_plural = 'страница с информацией'
 
+    def __str__(self):
+        return self.reader
+
 
 class About(models.Model):
     journal = models.TextField(verbose_name='раздел о журнале', )
@@ -47,6 +50,9 @@ class About(models.Model):
     class Meta:
         verbose_name = 'о журнале'
         verbose_name_plural = 'о журнале'
+
+    def __str__(self):
+        return self.journal
 
 
 class ClientContact(CreatedModel):
@@ -140,4 +146,4 @@ class Article(models.Model):
         return '%s | %s' % (self.author, self.article_title)
 
     def get_absolute_url(self):
-        return reverse('journal_template:article_detail', kwargs={"slug": self.pk})
+        return reverse('journal_template:article_detail', kwargs={'slug': self.pk})
