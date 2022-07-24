@@ -8,7 +8,7 @@ from django.test import Client, TestCase
 from journal_template.models import Article
 
 
-class Url(NamedTuple):
+class UrlAndTemplate(NamedTuple):
     """Urls and templates."""
 
     url: str
@@ -20,29 +20,29 @@ class URLTests(TestCase):
         self.guest_client = Client()
         self.article_model = Article.objects.create()
         self.urls = {
-            'index': Url(
+            'index': UrlAndTemplate(
                 url='/',
                 template='index.html'
             ),
-            'info_page': Url(
+            'info_page': UrlAndTemplate(
                 url='/info_page/',
                 template='info.html'
             ),
-            'about': Url(
+            'about': UrlAndTemplate(
                 url='/about/',
                 template='about.html'
             ),
-            'archive': Url(
+            'archive': UrlAndTemplate(
                 url='/archive/',
                 template='archive.html'
             ),
-            'article_detail': Url(
+            'article_detail': UrlAndTemplate(
                 url=f'/article_detail/{self.article_model.pk}/',
                 template='article_detail.html'
             ),
         }
         self.errors = {
-            'error_404': Url(
+            'error_404': UrlAndTemplate(
                 url='/some_url/',
                 template='errors/404.html',
             )

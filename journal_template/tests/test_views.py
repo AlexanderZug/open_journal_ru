@@ -8,7 +8,7 @@ from django.urls import reverse
 from journal_template.models import Article
 
 
-class PageContent(NamedTuple):
+class NameAndTemplate(NamedTuple):
     """Schema for names and templates."""
 
     name: str
@@ -20,23 +20,23 @@ class ViewTest(TestCase):
         self.guest_client = Client()
         self.article_model = Article.objects.create()
         self.name_template = {
-            'index': PageContent(
+            'index': NameAndTemplate(
                 name=reverse('journal_template:index'),
                 template='index.html'
             ),
-            'info': PageContent(
+            'info': NameAndTemplate(
                 name=reverse('journal_template:info'),
                 template='info.html'
             ),
-            'about': PageContent(
+            'about': NameAndTemplate(
                 name=reverse('journal_template:about'),
                 template='about.html'
             ),
-            'archive': PageContent(
+            'archive': NameAndTemplate(
                 name=reverse('journal_template:archive'),
                 template='archive.html'
             ),
-            'article_detail': PageContent(
+            'article_detail': NameAndTemplate(
                 name=reverse('journal_template:article_detail',
                              kwargs={'slug': self.article_model.pk}),
                 template='article_detail.html'
