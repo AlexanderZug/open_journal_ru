@@ -113,6 +113,9 @@ class Archive(CreatedModel):
     def __str__(self):
         return self.issue_title
 
+    def get_absolute_url(self):
+        return reverse('journal_template:archive_detail', kwargs={'slug': self.pk})
+
 
 class Article(models.Model):
     article_title = models.CharField(verbose_name='название статьи',

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %} {{ title }} {% endblock %}
+{% block content %}
+  <p>{{ archive_detail.issue_title }}</p>
+        <a role="button"
+         href="{{ archive_detail.article.article_pdf.url }}"
+         download="{{ archive_detail.article.article_pdf.url }}"
+         class="btn btn-light text-dark ml-0">
+        Скачать статью
+      </a>
+  <a href="{{ archive_detail.article.get_absolute_url }}">link</a>
+{% endblock %}

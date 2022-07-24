@@ -6,4 +6,10 @@
   <p class="mt-5">{{ article_page.keywords }}</p>
   <p class="mt-5">{{ article_page.summary }}</p>
   <p class="mt-5">{{ article_page.affiliation }}</p>
+        <a role="button"
+         href="{{ article_page.article_pdf.url }}"
+         download="{{ article_page.article_pdf.url }}"
+         class="btn btn-light text-dark ml-0">
+        Скачать статью
+      </a>
 {% endblock %}

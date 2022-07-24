@@ -1,4 +1,3 @@
-
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView
 
@@ -38,6 +37,14 @@ class ArchiveView(ListView):
     template_name = 'archive.html'
     context_object_name = 'archive_page'
     extra_context = {'title': 'archive'}
+
+
+class ArchiveDetailView(DetailView):
+    model = Archive
+    template_name = 'archive_detail.html'
+    slug_field = 'id'
+    context_object_name = 'archive_detail'
+    extra_context = {'title': 'archive_detail'}
 
 
 class ArticleDetailView(DetailView):
