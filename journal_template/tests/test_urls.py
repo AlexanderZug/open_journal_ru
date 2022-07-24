@@ -5,11 +5,11 @@ from typing import NamedTuple
 
 from django.test import Client, TestCase
 
-from journal_template.models import Article
+from journal_template.models import Article, Archive
 
 
 class UrlAndTemplate(NamedTuple):
-    """Urls and templates."""
+    """Schema for urls and templates."""
 
     url: str
     template: str
@@ -19,6 +19,7 @@ class URLTests(TestCase):
     def setUp(self):
         self.guest_client = Client()
         self.article_model = Article.objects.create()
+        self.archive_model = Archive.objects.create()
         self.urls = {
             'index': UrlAndTemplate(
                 url='/',
@@ -40,6 +41,10 @@ class URLTests(TestCase):
                 url=f'/article_detail/{self.article_model.pk}/',
                 template='article_detail.html'
             ),
+            'archive_detail': UrlAndTemplate(
+                url=f'/archive_detail/{self.archive_model.pk}/',
+                template='archive_detail.html'
+            )
         }
         self.errors = {
             'error_404': UrlAndTemplate(
@@ -69,3 +74,4 @@ class URLTests(TestCase):
             f'/{"/".join(random.choice(letters) for _ in range(10))}/')
         self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)
         self.assertTemplateUsed(response, self.errors['error_404'].template)
+

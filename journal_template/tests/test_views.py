@@ -5,7 +5,7 @@ from django import forms
 from django.test import Client, TestCase
 from django.urls import reverse
 
-from journal_template.models import Article
+from journal_template.models import Article, Archive
 
 
 class NameAndTemplate(NamedTuple):
@@ -19,6 +19,7 @@ class ViewTest(TestCase):
     def setUp(self):
         self.guest_client = Client()
         self.article_model = Article.objects.create()
+        self.archive_model = Archive.objects.create()
         self.name_template = {
             'index': NameAndTemplate(
                 name=reverse('journal_template:index'),
@@ -41,6 +42,11 @@ class ViewTest(TestCase):
                              kwargs={'slug': self.article_model.pk}),
                 template='article_detail.html'
             ),
+            'archive_detail': NameAndTemplate(
+                name=reverse('journal_template:archive_detail',
+                             kwargs={'slug': self.archive_model.pk}),
+                template='archive_detail.html'
+            )
         }
         self.form_fields = {
             'name': forms.fields.CharField,
