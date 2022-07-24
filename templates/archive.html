@@ -8,10 +8,9 @@
       <p>{{ article.article.article_title }}</p>
       <p>{{ article.article.author }}</p>
       <p>{{ article.article.category }}</p>
-      <p>{{ article.article.id }}</p>
-      {% cache 5000 sidebar %}
+      <p class="fs-3">{{ article.article.id }}</p>
       {% if article.issue_img %}
-        <img src="{{ article.issue_img.url }}" alt="">
+       <p><img src="{{ article.issue_img.url }}" alt="journal's photo"></p>
       {% endif %}
       {% if article.all_issue_pdf %}
       <div class="">
@@ -29,7 +28,6 @@
          class="btn btn-light text-dark ml-0">
         Скачать статью
       </a>
-      {% endcache %}
       <a href="{{ article.article.get_absolute_url }}">link</a>
     {% endfor %}
 {% endblock %}

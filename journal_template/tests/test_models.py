@@ -107,7 +107,6 @@ class ModelTests(TestCase):
             f'{self.client_contact}': f'{self.client_contact.surname}',
             f'{self.archive}': f'{self.archive.issue_title}',
             f'{self.article}': f'{"%s | %s" % (self.article.author, self.article.article_title)}',
-            f'{self.category}': f'{self.category.category_name}',
         }
         for field, expected_object_name in fields_str.items():
             with self.subTest(field=field):

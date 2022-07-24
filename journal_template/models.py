@@ -71,14 +71,14 @@ class ClientContact(CreatedModel):
 
 class Category(models.Model):
     category_name = models.CharField(verbose_name='категории',
-                                     max_length=250, )
+                                     max_length=250,
+                                     blank=True,
+                                     null=True,
+                                     )
 
     class Meta:
         verbose_name = 'категория'
         verbose_name_plural = 'категории'
-
-    def __str__(self):
-        return self.category_name
 
 
 class Archive(CreatedModel):
@@ -134,6 +134,7 @@ class Article(models.Model):
     category = models.ForeignKey('Category',
                                  verbose_name='категория (опционально)',
                                  on_delete=models.SET_NULL,
+                                 blank=True,
                                  null=True,
                                  related_name='categories',
                                  )

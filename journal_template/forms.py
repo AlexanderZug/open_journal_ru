@@ -12,7 +12,7 @@ class ClientContactForm(forms.ModelForm):
 
     class Meta:
         model = ClientContact
-        fields = ('name', 'surname', 'email', 'massage')
+        fields = '__all__'
         help_texts = {
             'name': 'Введите имя.',
             'surname': 'Введите фамилию.',

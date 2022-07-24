@@ -1,6 +1,6 @@
 
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DeleteView, ListView
+from django.views.generic import CreateView, ListView, DetailView
 
 from .forms import ClientContactForm
 from .models import About, Archive, Article, IndexPage, InformationPage
@@ -40,7 +40,7 @@ class ArchiveView(ListView):
     extra_context = {'title': 'archive'}
 
 
-class ArticleDetailView(DeleteView):
+class ArticleDetailView(DetailView):
     model = Article
     template_name = 'article_detail.html'
     slug_field = 'id'
