@@ -1,6 +1,9 @@
 asgiref==3.5.2
 backports.zoneinfo==0.2.1
+coverage==6.4.2
 Django==4.0.5
 django-colorfield==0.7.1
+django-debug-toolbar==3.5.0
 Pillow==9.1.1
+sorl-thumbnail==12.8.0
 sqlparse==0.4.2

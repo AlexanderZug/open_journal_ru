@@ -1,12 +1,26 @@
 {% extends 'base.html' %}
+{% load cache %}
 {% block title %} {{ title }} {% endblock %}
 {% block content %}
+  {% cache 20 archive_detail %}
   <p>{{ archive_detail.issue_title }}</p>
-        <a role="button"
-         href="{{ archive_detail.article.article_pdf.url }}"
-         download="{{ archive_detail.article.article_pdf.url }}"
+  <p>{{ archive_detail.issue_number }}</p>
+  {% if archive_detail.all_issue_pdf %}
+    <div class="">
+      <a role="button"
+         href="{{ archive_detail.all_issue_pdf.url }}"
+         download="{{ archive_detail.all_issue_pdf.url }}"
          class="btn btn-light text-dark ml-0">
-        Скачать статью
+        Скачать весь номер
       </a>
+    </div>
+  {% endif %}
+  <a role="button"
+     href="{{ archive_detail.article.article_pdf.url }}"
+     download="{{ archive_detail.article.article_pdf.url }}"
+     class="btn btn-light text-dark ml-0">
+    Скачать статью
+  </a>
   <a href="{{ archive_detail.article.get_absolute_url }}">link</a>
+  {% endcache %}
 {% endblock %}

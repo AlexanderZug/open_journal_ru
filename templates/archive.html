@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% load cache %}
+{% load thumbnail %}
 {% block title %} {{ title }} {% endblock %}
 {% block content %}
+  {% cache 20 archive_page %}
     {% for article in archive_page %}
       <p class="fs-3">{{ article.issue_title }}</p>
       <p class="fs-3">{{ article.publish_date }}</p>
@@ -9,9 +11,11 @@
       <p>{{ article.article.author }}</p>
       <p>{{ article.article.category }}</p>
       <p class="fs-3">{{ article.article.id }}</p>
+      {% thumbnail article.issue_img "200x300" crop="center" as im %}
       {% if article.issue_img %}
-       <p><img src="{{ article.issue_img.url }}" alt="journal's photo"></p>
+       <p><img src="{{ im.url }}" alt="journal's photo"></p>
       {% endif %}
+      {% endthumbnail %}
       {% if article.all_issue_pdf %}
       <div class="">
         <a role="button"
@@ -30,5 +34,6 @@
       </a>
       <a href="{{ article.get_absolute_url }}">link</a>
     {% endfor %}
+  {% endcache %}
   {% include 'includes/paginator.html' %}
 {% endblock %}

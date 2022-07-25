@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
+{% load thumbnail %}
 {% block title %} {{ title }} {% endblock %}
 {% block content %}
   {% for cont in page_obj %}
-    <p class="mt-5 fs-1">{{ cont.title }}</p>
+    {% thumbnail cont.head_img "1800x200" crop="center" as im %}
     {% if cont.head_img %}
-    <img src="{{ cont.head_img.url }}" alt="some">
+    <img src="{{ im.url }}" alt="some">
     {% endif %}
+    {% endthumbnail %}
+    <p class="mt-5 fs-1">{{ cont.title }}</p>
   {% endfor %}
 {% endblock %}
