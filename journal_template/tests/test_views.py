@@ -2,6 +2,7 @@ from http import HTTPStatus
 from typing import NamedTuple
 
 from django import forms
+from django.core.cache import cache
 from django.test import Client, TestCase
 from django.urls import reverse
 
@@ -104,3 +105,61 @@ class PaginatorTest(TestCase):
                                          + self.paginator['archive'].value)
         self.assertEqual(len(response.context.get('page_obj').object_list),
                          posts_number_on_next_page)
+
+
+class CacheTest(TestCase):
+    def setUp(self):
+        self.guest_client = Client()
+        self.archive_detail = Archive.objects.create()
+        self.archive_reverse = {'archive': PageContentSchema(
+                name=reverse('journal_template:archive'),
+                value='archive.html'
+            ),
+            'archive_detail': PageContentSchema(
+                name=reverse('journal_template:archive_detail',
+                             kwargs={'slug': self.archive_detail.pk}),
+                value='archive_detail.html'
+            )
+        }
+
+    def test_cache_archive_page(self):
+        """Check cache on archive page."""
+        first_response = self.client.get(self.archive_reverse['archive'].name)
+        Archive.objects.create(
+            issue_title='Test title',
+            issue_number='Test number',
+        )
+        second_response = self.client.get(self.archive_reverse['archive'].name)
+        self.assertEqual(
+            first_response.content,
+            second_response.content
+        )
+        cache.clear()
+        response_after_cache_clear = self.client.get(
+            self.archive_reverse['archive'].name)
+        self.assertNotEqual(
+            first_response.content,
+            response_after_cache_clear.content
+        )
+        cache.clear()
+
+    def test_cache_archive_detail(self):
+        """Check cache on archive detail."""
+        first_response = self.client.get(self.archive_reverse['archive_detail'].name)
+        second_response = self.client.get(self.archive_reverse['archive_detail'].name)
+        new_modal_creating = Archive.objects.create(
+            issue_title='Test title',
+            issue_number='Test number',
+        )
+        self.assertEqual(
+            first_response.content,
+            second_response.content
+        )
+        cache.clear()
+        response_after_cache_clear = self.client.get(
+            reverse('journal_template:archive_detail', kwargs={'slug': new_modal_creating.pk}))
+        self.assertNotEqual(
+            first_response.content,
+            response_after_cache_clear.content
+        )
+        cache.clear()

@@ -12,19 +12,19 @@
       <p>{{ article.article.category }}</p>
       <p class="fs-3">{{ article.article.id }}</p>
       {% thumbnail article.issue_img "200x300" crop="center" as im %}
-      {% if article.issue_img %}
-       <p><img src="{{ im.url }}" alt="journal's photo"></p>
-      {% endif %}
+        {% if article.issue_img %}
+          <p><img src="{{ im.url }}" alt="journal's photo"></p>
+        {% endif %}
       {% endthumbnail %}
       {% if article.all_issue_pdf %}
-      <div class="">
-        <a role="button"
-           href="{{ article.all_issue_pdf.url }}"
-           download="{{ article.all_issue_pdf.url }}"
-           class="btn btn-light text-dark ml-0">
-          Скачать весь номер
-        </a>
-      </div>
+        <div class="">
+          <a role="button"
+             href="{{ article.all_issue_pdf.url }}"
+             download="{{ article.all_issue_pdf.url }}"
+             class="btn btn-light text-dark ml-0">
+            Скачать весь номер
+          </a>
+        </div>
       {% endif %}
       <a role="button"
          href="{{ article.article.article_pdf.url }}"
