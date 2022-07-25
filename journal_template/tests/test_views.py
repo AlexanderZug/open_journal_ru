@@ -6,13 +6,14 @@ from django.test import Client, TestCase
 from django.urls import reverse
 
 from journal_template.models import Article, Archive
+from open_journal_ru.settings import ARCHIVES_PER_PAGE
 
 
-class NameAndTemplate(NamedTuple):
-    """Schema for names and templates."""
+class PageContentSchema(NamedTuple):
+    """Schema for names, templates and second page URL."""
 
     name: str
-    template: str
+    value: str
 
 
 class ViewTest(TestCase):
@@ -21,31 +22,31 @@ class ViewTest(TestCase):
         self.article_model = Article.objects.create()
         self.archive_model = Archive.objects.create()
         self.name_template = {
-            'index': NameAndTemplate(
+            'index': PageContentSchema(
                 name=reverse('journal_template:index'),
-                template='index.html'
+                value='index.html'
             ),
-            'info': NameAndTemplate(
+            'info': PageContentSchema(
                 name=reverse('journal_template:info'),
-                template='info.html'
+                value='info.html'
             ),
-            'about': NameAndTemplate(
+            'about': PageContentSchema(
                 name=reverse('journal_template:about'),
-                template='about.html'
+                value='about.html'
             ),
-            'archive': NameAndTemplate(
+            'archive': PageContentSchema(
                 name=reverse('journal_template:archive'),
-                template='archive.html'
+                value='archive.html'
             ),
-            'article_detail': NameAndTemplate(
+            'article_detail': PageContentSchema(
                 name=reverse('journal_template:article_detail',
                              kwargs={'slug': self.article_model.pk}),
-                template='article_detail.html'
+                value='article_detail.html'
             ),
-            'archive_detail': NameAndTemplate(
+            'archive_detail': PageContentSchema(
                 name=reverse('journal_template:archive_detail',
                              kwargs={'slug': self.archive_model.pk}),
-                template='archive_detail.html'
+                value='archive_detail.html'
             )
         }
         self.form_fields = {
@@ -60,7 +61,7 @@ class ViewTest(TestCase):
         for names_and_template in self.name_template.values():
             with self.subTest(template=names_and_template.name):
                 response = self.guest_client.get(names_and_template.name)
-                self.assertTemplateUsed(response, names_and_template.template)
+                self.assertTemplateUsed(response, names_and_template.value)
 
     def test_view_url_accessible_by_name(self):
         """Check URL is accessible by name."""
@@ -77,3 +78,29 @@ class ViewTest(TestCase):
                     self.name_template['info'].name)
                 form_field = response.context.get('form').fields.get(field)
                 self.assertIsInstance(form_field, expected)
+
+
+class PaginatorTest(TestCase):
+    def setUp(self):
+        self.guest_client = Client()
+        self.archive_model = [Archive.objects.create(issue_number=f'Issues {i}')
+                              for i in range(ARCHIVES_PER_PAGE * 2)]
+        self.paginator = {'archive': PageContentSchema(
+            name=reverse('journal_template:archive'),
+            value='?page=2'
+        )}
+
+    def test_paginator_first_page(self):
+        """Check that paginator gives 5 archives per page."""
+        response = self.guest_client.get(self.paginator['archive'].name)
+        self.assertEqual(len(response.context.get('page_obj').object_list),
+                         ARCHIVES_PER_PAGE)
+
+    def test_paginator_next_page(self):
+        """Check that paginator shows archives on the second page."""
+        posts_number_on_next_page = (ARCHIVES_PER_PAGE * 2
+                                     - ARCHIVES_PER_PAGE)
+        response = self.guest_client.get(self.paginator['archive'].name
+                                         + self.paginator['archive'].value)
+        self.assertEqual(len(response.context.get('page_obj').object_list),
+                         posts_number_on_next_page)

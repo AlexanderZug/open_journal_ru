@@ -1,6 +1,7 @@
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView
 
+from open_journal_ru.settings import ARCHIVES_PER_PAGE
 from .forms import ClientContactForm
 from .models import About, Archive, Article, IndexPage, InformationPage
 
@@ -36,6 +37,7 @@ class ArchiveView(ListView):
     queryset = Archive.objects.select_related('article').all()
     template_name = 'archive.html'
     context_object_name = 'archive_page'
+    paginate_by = ARCHIVES_PER_PAGE
     extra_context = {'title': 'archive'}
 
 

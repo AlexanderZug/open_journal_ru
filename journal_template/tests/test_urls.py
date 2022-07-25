@@ -74,4 +74,3 @@ class URLTests(TestCase):
             f'/{"/".join(random.choice(letters) for _ in range(10))}/')
         self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)
         self.assertTemplateUsed(response, self.errors['error_404'].template)
-
