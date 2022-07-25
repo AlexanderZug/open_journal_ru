@@ -5,7 +5,7 @@ from django import forms
 from django.test import Client, TestCase
 from django.urls import reverse
 
-from journal_template.models import Article, Archive
+from journal_template.models import Archive, Article
 from open_journal_ru.settings import ARCHIVES_PER_PAGE
 
 

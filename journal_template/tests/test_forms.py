@@ -1,5 +1,6 @@
 from django.test import Client, TestCase
 from django.urls import reverse
+
 from journal_template.forms import ClientContactForm
 from journal_template.models import ClientContact
 

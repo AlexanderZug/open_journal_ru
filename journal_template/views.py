@@ -1,7 +1,8 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, DetailView
+from django.views.generic import CreateView, DetailView, ListView
 
 from open_journal_ru.settings import ARCHIVES_PER_PAGE
+
 from .forms import ClientContactForm
 from .models import About, Archive, Article, IndexPage, InformationPage
 

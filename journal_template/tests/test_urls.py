@@ -5,7 +5,7 @@ from typing import NamedTuple
 
 from django.test import Client, TestCase
 
-from journal_template.models import Article, Archive
+from journal_template.models import Archive, Article
 
 
 class UrlAndTemplate(NamedTuple):
