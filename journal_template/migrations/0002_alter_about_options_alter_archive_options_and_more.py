@@ -14,32 +14,53 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='about',
-            options={'verbose_name': 'о журнале', 'verbose_name_plural': 'о журнале'},
+            options={
+                'verbose_name': 'о журнале',
+                'verbose_name_plural': 'о журнале',
+            },
         ),
         migrations.AlterModelOptions(
             name='archive',
-            options={'ordering': ('-publish_date',), 'verbose_name': 'архив', 'verbose_name_plural': 'архив'},
+            options={
+                'ordering': ('-publish_date',),
+                'verbose_name': 'архив',
+                'verbose_name_plural': 'архив',
+            },
         ),
         migrations.AlterModelOptions(
             name='article',
-            options={'verbose_name': 'статья', 'verbose_name_plural': 'статьи'},
+            options={
+                'verbose_name': 'статья',
+                'verbose_name_plural': 'статьи',
+            },
         ),
         migrations.AlterModelOptions(
             name='category',
-            options={'verbose_name': 'категория', 'verbose_name_plural': 'категории'},
+            options={
+                'verbose_name': 'категория',
+                'verbose_name_plural': 'категории',
+            },
         ),
         migrations.AlterModelOptions(
             name='indexpage',
-            options={'verbose_name': 'главная страница', 'verbose_name_plural': 'главная страница'},
+            options={
+                'verbose_name': 'главная страница',
+                'verbose_name_plural': 'главная страница',
+            },
         ),
         migrations.AlterModelOptions(
             name='informationpage',
-            options={'verbose_name': 'страница с информацией', 'verbose_name_plural': 'страница с информацией'},
+            options={
+                'verbose_name': 'страница с информацией',
+                'verbose_name_plural': 'страница с информацией',
+            },
         ),
         migrations.AlterField(
             model_name='about',
             name='contact',
-            field=models.CharField(max_length=300, verbose_name='контакты журнала'),
+            field=models.CharField(
+                max_length=300, verbose_name='контакты журнала'
+            ),
         ),
         migrations.AlterField(
             model_name='about',
@@ -54,17 +75,25 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='archive',
             name='all_issue_pdf',
-            field=models.FileField(blank=True, upload_to='issue_pdf/', verbose_name='номер целиком (опционально)'),
+            field=models.FileField(
+                blank=True,
+                upload_to='issue_pdf/',
+                verbose_name='номер целиком (опционально)',
+            ),
         ),
         migrations.AlterField(
             model_name='archive',
             name='article_pdf',
-            field=models.FileField(upload_to='issue_pdf/', verbose_name='pdf-файл статьи'),
+            field=models.FileField(
+                upload_to='issue_pdf/', verbose_name='pdf-файл статьи'
+            ),
         ),
         migrations.AlterField(
             model_name='archive',
             name='article_title',
-            field=models.CharField(max_length=300, verbose_name='название статьи'),
+            field=models.CharField(
+                max_length=300, verbose_name='название статьи'
+            ),
         ),
         migrations.AlterField(
             model_name='archive',
@@ -74,22 +103,40 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='archive',
             name='category',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='categories', to='journal_template.category', verbose_name='категория (опционально)'),
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name='categories',
+                to='journal_template.category',
+                verbose_name='категория (опционально)',
+            ),
         ),
         migrations.AlterField(
             model_name='archive',
             name='issue_img',
-            field=models.ImageField(blank=True, null=True, upload_to='issue_img/%Y/%m/%d/', verbose_name='фотография номера журнала (опционально)'),
+            field=models.ImageField(
+                blank=True,
+                null=True,
+                upload_to='issue_img/%Y/%m/%d/',
+                verbose_name='фотография номера журнала (опционально)',
+            ),
         ),
         migrations.AlterField(
             model_name='archive',
             name='issue_title',
-            field=models.CharField(blank=True, max_length=250, verbose_name='заголовок журнала (опционально)'),
+            field=models.CharField(
+                blank=True,
+                max_length=250,
+                verbose_name='заголовок журнала (опционально)',
+            ),
         ),
         migrations.AlterField(
             model_name='archive',
             name='publish_date',
-            field=models.DateField(auto_now_add=True, verbose_name='дата публикации (автоматически)'),
+            field=models.DateField(
+                auto_now_add=True,
+                verbose_name='дата публикации (автоматически)',
+            ),
         ),
         migrations.AlterField(
             model_name='article',
@@ -99,7 +146,9 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='article',
             name='keywords',
-            field=models.CharField(max_length=300, verbose_name='ключевые слова'),
+            field=models.CharField(
+                max_length=300, verbose_name='ключевые слова'
+            ),
         ),
         migrations.AlterField(
             model_name='article',
@@ -114,17 +163,31 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='indexpage',
             name='footer_color',
-            field=colorfield.fields.ColorField(blank=True, default='#FF0000', image_field=None, max_length=18, samples=None, verbose_name='цвет футера (опционально)'),
+            field=colorfield.fields.ColorField(
+                blank=True,
+                default='#FF0000',
+                image_field=None,
+                max_length=18,
+                samples=None,
+                verbose_name='цвет футера (опционально)',
+            ),
         ),
         migrations.AlterField(
             model_name='indexpage',
             name='head_img',
-            field=models.ImageField(blank=True, null=True, upload_to='head_img/%Y/%m/%d/', verbose_name='титульная фотография (опционально)'),
+            field=models.ImageField(
+                blank=True,
+                null=True,
+                upload_to='head_img/%Y/%m/%d/',
+                verbose_name='титульная фотография (опционально)',
+            ),
         ),
         migrations.AlterField(
             model_name='indexpage',
             name='title',
-            field=models.CharField(max_length=250, verbose_name='название журнала'),
+            field=models.CharField(
+                max_length=250, verbose_name='название журнала'
+            ),
         ),
         migrations.AlterField(
             model_name='informationpage',

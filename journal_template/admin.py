@@ -1,7 +1,14 @@
 from django.contrib import admin
 
-from .models import (About, Archive, Article, Category, ClientContact,
-                     IndexPage, InformationPage)
+from .models import (
+    About,
+    Archive,
+    Article,
+    Category,
+    ClientContact,
+    IndexPage,
+    InformationPage,
+)
 
 
 class IndexPageAdmin(admin.ModelAdmin):
@@ -29,9 +36,7 @@ class AboutAdmin(admin.ModelAdmin):
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = (
-        'category_name',
-    )
+    list_display = ('category_name',)
 
 
 class ArchiveAdmin(admin.ModelAdmin):
@@ -42,7 +47,6 @@ class ArchiveAdmin(admin.ModelAdmin):
         'publish_date',
         'all_issue_pdf',
         'article',
-
     )
     search_fields = ('author',)
     list_filter = ('publish_date',)

@@ -7,13 +7,23 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('journal_template', '0019_alter_archive_article_alter_article_category'),
+        (
+            'journal_template',
+            '0019_alter_archive_article_alter_article_category',
+        ),
     ]
 
     operations = [
         migrations.AlterField(
             model_name='article',
             name='category',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='categories', to='journal_template.category', verbose_name='категория (опционально)'),
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name='categories',
+                to='journal_template.category',
+                verbose_name='категория (опционально)',
+            ),
         ),
     ]

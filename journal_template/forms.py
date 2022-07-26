@@ -6,9 +6,9 @@ from .models import ClientContact
 class ClientContactForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['massage'].widget.attrs['placeholder'] = (
-            'Введите сообщение'
-        )
+        self.fields['massage'].widget.attrs[
+            'placeholder'
+        ] = 'Введите сообщение'
 
     class Meta:
         model = ClientContact

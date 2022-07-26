@@ -13,11 +13,19 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='archive',
             name='publish_date',
-            field=models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='дата (автоматически)'),
+            field=models.DateTimeField(
+                auto_now_add=True,
+                db_index=True,
+                verbose_name='дата (автоматически)',
+            ),
         ),
         migrations.AlterField(
             model_name='clientcontact',
             name='publish_date',
-            field=models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='дата (автоматически)'),
+            field=models.DateTimeField(
+                auto_now_add=True,
+                db_index=True,
+                verbose_name='дата (автоматически)',
+            ),
         ),
     ]

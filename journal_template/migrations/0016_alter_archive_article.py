@@ -14,6 +14,13 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='archive',
             name='article',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='articles', to='journal_template.article', verbose_name='статья|автор статьи (необходимо заполнить)'),
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name='articles',
+                to='journal_template.article',
+                verbose_name='статья|автор статьи (необходимо заполнить)',
+            ),
         ),
     ]

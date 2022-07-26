@@ -9,14 +9,21 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
             name='About',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                (
+                    'id',
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID',
+                    ),
+                ),
                 ('journal', models.TextField()),
                 ('editorial_team', models.TextField()),
                 ('contact', models.CharField(max_length=300)),
@@ -25,9 +32,22 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Archive',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                (
+                    'id',
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID',
+                    ),
+                ),
                 ('issue_title', models.CharField(max_length=250)),
-                ('issue_img', models.ImageField(blank=True, null=True, upload_to='issue_img/%Y/%m/%d/')),
+                (
+                    'issue_img',
+                    models.ImageField(
+                        blank=True, null=True, upload_to='issue_img/%Y/%m/%d/'
+                    ),
+                ),
                 ('publish_date', models.DateField(auto_now_add=True)),
                 ('all_issue_pdf', models.FileField(upload_to='issue_pdf/')),
                 ('article_title', models.CharField(max_length=300)),
@@ -38,23 +58,60 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Category',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                (
+                    'id',
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID',
+                    ),
+                ),
                 ('category_name', models.CharField(max_length=250)),
             ],
         ),
         migrations.CreateModel(
             name='IndexPage',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                (
+                    'id',
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID',
+                    ),
+                ),
                 ('title', models.CharField(max_length=250)),
-                ('head_img', models.ImageField(blank=True, null=True, upload_to='head_img/%Y/%m/%d/')),
-                ('footer_color', colorfield.fields.ColorField(default='#FF0000', image_field=None, max_length=18, samples=None)),
+                (
+                    'head_img',
+                    models.ImageField(
+                        blank=True, null=True, upload_to='head_img/%Y/%m/%d/'
+                    ),
+                ),
+                (
+                    'footer_color',
+                    colorfield.fields.ColorField(
+                        default='#FF0000',
+                        image_field=None,
+                        max_length=18,
+                        samples=None,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
             name='InformationPage',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                (
+                    'id',
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID',
+                    ),
+                ),
                 ('reader', models.TextField()),
                 ('authors', models.TextField()),
                 ('library', models.TextField()),
@@ -63,16 +120,37 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Article',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                (
+                    'id',
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID',
+                    ),
+                ),
                 ('affiliation', models.CharField(max_length=350)),
                 ('keywords', models.CharField(max_length=300)),
                 ('summary', models.TextField()),
-                ('archive', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='articles', to='journal_template.archive')),
+                (
+                    'archive',
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        related_name='articles',
+                        to='journal_template.archive',
+                    ),
+                ),
             ],
         ),
         migrations.AddField(
             model_name='archive',
             name='category',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='categories', to='journal_template.category'),
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name='categories',
+                to='journal_template.category',
+            ),
         ),
     ]

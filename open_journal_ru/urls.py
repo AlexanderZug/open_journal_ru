@@ -22,7 +22,7 @@ from django.urls import include, path
 urlpatterns = [
     path('', include('journal_template.urls', namespace='journals')),
     path('admin/', admin.site.urls),
-    path('__debug__/', include('debug_toolbar.urls'))
+    path('__debug__/', include('debug_toolbar.urls')),
 ]
 
 handler404 = 'core.views.page_not_found'

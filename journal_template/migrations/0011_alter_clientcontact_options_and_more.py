@@ -13,18 +13,27 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='clientcontact',
-            options={'verbose_name': 'контакт пользователя', 'verbose_name_plural': 'контакты пользователя'},
+            options={
+                'verbose_name': 'контакт пользователя',
+                'verbose_name_plural': 'контакты пользователя',
+            },
         ),
         migrations.AddField(
             model_name='clientcontact',
             name='publish_date',
-            field=models.DateField(auto_now_add=True, default=django.utils.timezone.now, verbose_name='дата (автоматически)'),
+            field=models.DateField(
+                auto_now_add=True,
+                default=django.utils.timezone.now,
+                verbose_name='дата (автоматически)',
+            ),
             preserve_default=False,
         ),
         migrations.AlterField(
             model_name='archive',
             name='publish_date',
-            field=models.DateField(auto_now_add=True, verbose_name='дата (автоматически)'),
+            field=models.DateField(
+                auto_now_add=True, verbose_name='дата (автоматически)'
+            ),
         ),
         migrations.AlterField(
             model_name='clientcontact',

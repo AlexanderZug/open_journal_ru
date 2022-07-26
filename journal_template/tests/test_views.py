@@ -24,31 +24,31 @@ class ViewTest(TestCase):
         self.archive_model = Archive.objects.create()
         self.name_template = {
             'index': PageContentSchema(
-                name=reverse('journal_template:index'),
-                value='index.html'
+                name=reverse('journal_template:index'), value='index.html'
             ),
             'info': PageContentSchema(
-                name=reverse('journal_template:info'),
-                value='info.html'
+                name=reverse('journal_template:info'), value='info.html'
             ),
             'about': PageContentSchema(
-                name=reverse('journal_template:about'),
-                value='about.html'
+                name=reverse('journal_template:about'), value='about.html'
             ),
             'archive': PageContentSchema(
-                name=reverse('journal_template:archive'),
-                value='archive.html'
+                name=reverse('journal_template:archive'), value='archive.html'
             ),
             'article_detail': PageContentSchema(
-                name=reverse('journal_template:article_detail',
-                             kwargs={'slug': self.article_model.pk}),
-                value='article_detail.html'
+                name=reverse(
+                    'journal_template:article_detail',
+                    kwargs={'slug': self.article_model.pk},
+                ),
+                value='article_detail.html',
             ),
             'archive_detail': PageContentSchema(
-                name=reverse('journal_template:archive_detail',
-                             kwargs={'slug': self.archive_model.pk}),
-                value='archive_detail.html'
-            )
+                name=reverse(
+                    'journal_template:archive_detail',
+                    kwargs={'slug': self.archive_model.pk},
+                ),
+                value='archive_detail.html',
+            ),
         }
         self.form_fields = {
             'name': forms.fields.CharField,
@@ -76,7 +76,8 @@ class ViewTest(TestCase):
         for field, expected in self.form_fields.items():
             with self.subTest(field=field):
                 response = self.guest_client.get(
-                    self.name_template['info'].name)
+                    self.name_template['info'].name
+                )
                 form_field = response.context.get('form').fields.get(field)
                 self.assertIsInstance(form_field, expected)
 
@@ -84,42 +85,51 @@ class ViewTest(TestCase):
 class PaginatorTest(TestCase):
     def setUp(self):
         self.guest_client = Client()
-        self.archive_model = [Archive.objects.create(issue_number=f'Issues {i}')
-                              for i in range(ARCHIVES_PER_PAGE * 2)]
-        self.paginator = {'archive': PageContentSchema(
-            name=reverse('journal_template:archive'),
-            value='?page=2'
-        )}
+        self.archive_model = [
+            Archive.objects.create(issue_number=f'Issues {i}')
+            for i in range(ARCHIVES_PER_PAGE * 2)
+        ]
+        self.paginator = {
+            'archive': PageContentSchema(
+                name=reverse('journal_template:archive'), value='?page=2'
+            )
+        }
 
     def test_paginator_first_page(self):
         """Check that paginator gives 5 archives per page."""
         response = self.guest_client.get(self.paginator['archive'].name)
-        self.assertEqual(len(response.context.get('page_obj').object_list),
-                         ARCHIVES_PER_PAGE)
+        self.assertEqual(
+            len(response.context.get('page_obj').object_list),
+            ARCHIVES_PER_PAGE,
+        )
 
     def test_paginator_next_page(self):
         """Check that paginator shows archives on the second page."""
-        posts_number_on_next_page = (ARCHIVES_PER_PAGE * 2
-                                     - ARCHIVES_PER_PAGE)
-        response = self.guest_client.get(self.paginator['archive'].name
-                                         + self.paginator['archive'].value)
-        self.assertEqual(len(response.context.get('page_obj').object_list),
-                         posts_number_on_next_page)
+        posts_number_on_next_page = ARCHIVES_PER_PAGE * 2 - ARCHIVES_PER_PAGE
+        response = self.guest_client.get(
+            self.paginator['archive'].name + self.paginator['archive'].value
+        )
+        self.assertEqual(
+            len(response.context.get('page_obj').object_list),
+            posts_number_on_next_page,
+        )
 
 
 class CacheTest(TestCase):
     def setUp(self):
         self.guest_client = Client()
         self.archive_detail = Archive.objects.create()
-        self.archive_reverse = {'archive': PageContentSchema(
-                name=reverse('journal_template:archive'),
-                value='archive.html'
+        self.archive_reverse = {
+            'archive': PageContentSchema(
+                name=reverse('journal_template:archive'), value='archive.html'
             ),
             'archive_detail': PageContentSchema(
-                name=reverse('journal_template:archive_detail',
-                             kwargs={'slug': self.archive_detail.pk}),
-                value='archive_detail.html'
-            )
+                name=reverse(
+                    'journal_template:archive_detail',
+                    kwargs={'slug': self.archive_detail.pk},
+                ),
+                value='archive_detail.html',
+            ),
         }
 
     def test_cache_archive_page(self):
@@ -130,36 +140,37 @@ class CacheTest(TestCase):
             issue_number='Test number',
         )
         second_response = self.client.get(self.archive_reverse['archive'].name)
-        self.assertEqual(
-            first_response.content,
-            second_response.content
-        )
+        self.assertEqual(first_response.content, second_response.content)
         cache.clear()
         response_after_cache_clear = self.client.get(
-            self.archive_reverse['archive'].name)
+            self.archive_reverse['archive'].name
+        )
         self.assertNotEqual(
-            first_response.content,
-            response_after_cache_clear.content
+            first_response.content, response_after_cache_clear.content
         )
         cache.clear()
 
     def test_cache_archive_detail(self):
         """Check cache on archive detail."""
-        first_response = self.client.get(self.archive_reverse['archive_detail'].name)
-        second_response = self.client.get(self.archive_reverse['archive_detail'].name)
+        first_response = self.client.get(
+            self.archive_reverse['archive_detail'].name
+        )
+        second_response = self.client.get(
+            self.archive_reverse['archive_detail'].name
+        )
         new_modal_creating = Archive.objects.create(
             issue_title='Test title',
             issue_number='Test number',
         )
-        self.assertEqual(
-            first_response.content,
-            second_response.content
-        )
+        self.assertEqual(first_response.content, second_response.content)
         cache.clear()
         response_after_cache_clear = self.client.get(
-            reverse('journal_template:archive_detail', kwargs={'slug': new_modal_creating.pk}))
+            reverse(
+                'journal_template:archive_detail',
+                kwargs={'slug': new_modal_creating.pk},
+            )
+        )
         self.assertNotEqual(
-            first_response.content,
-            response_after_cache_clear.content
+            first_response.content, response_after_cache_clear.content
         )
         cache.clear()

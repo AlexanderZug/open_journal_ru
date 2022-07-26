@@ -1,7 +1,14 @@
 from django.test import TestCase
 
-from journal_template.models import (About, Archive, Article, Category,
-                                     ClientContact, IndexPage, InformationPage)
+from journal_template.models import (
+    About,
+    Archive,
+    Article,
+    Category,
+    ClientContact,
+    IndexPage,
+    InformationPage,
+)
 
 
 class ModelTests(TestCase):
@@ -23,8 +30,10 @@ class ModelTests(TestCase):
         }
         for field, expected_value in fields_verbose.items():
             with self.subTest(field=field):
-                self.assertEquals(self.index_model._meta.get_field(field).verbose_name,
-                                  expected_value)
+                self.assertEquals(
+                    self.index_model._meta.get_field(field).verbose_name,
+                    expected_value,
+                )
 
     def test_info_page_verbose_name(self):
         """Check verbose_names in InformationPage model."""
@@ -35,8 +44,10 @@ class ModelTests(TestCase):
         }
         for field, expected_value in fields_verbose.items():
             with self.subTest(field=field):
-                self.assertEquals(self.info_page._meta.get_field(field).verbose_name,
-                                  expected_value)
+                self.assertEquals(
+                    self.info_page._meta.get_field(field).verbose_name,
+                    expected_value,
+                )
 
     def test_about_page_verbose_name(self):
         """Check verbose_names in About model."""
@@ -47,8 +58,10 @@ class ModelTests(TestCase):
         }
         for field, expected_value in fields_verbose.items():
             with self.subTest(field=field):
-                self.assertEquals(self.about._meta.get_field(field).verbose_name,
-                                  expected_value)
+                self.assertEquals(
+                    self.about._meta.get_field(field).verbose_name,
+                    expected_value,
+                )
 
     def test_client_contact_verbose_name(self):
         """Check verbose_names in ClientContact model."""
@@ -60,8 +73,10 @@ class ModelTests(TestCase):
         }
         for field, expected_value in fields_verbose.items():
             with self.subTest(field=field):
-                self.assertEquals(self.client_contact._meta.get_field(field).verbose_name,
-                                  expected_value)
+                self.assertEquals(
+                    self.client_contact._meta.get_field(field).verbose_name,
+                    expected_value,
+                )
 
     def test_archive_verbose_name(self):
         """Check verbose_names in Archive model."""
@@ -74,8 +89,10 @@ class ModelTests(TestCase):
         }
         for field, expected_value in fields_verbose.items():
             with self.subTest(field=field):
-                self.assertEquals(self.archive._meta.get_field(field).verbose_name,
-                                  expected_value)
+                self.assertEquals(
+                    self.archive._meta.get_field(field).verbose_name,
+                    expected_value,
+                )
 
     def test_article_verbose_name(self):
         """Check verbose_names in Article model."""
@@ -90,8 +107,10 @@ class ModelTests(TestCase):
         }
         for field, expected_value in fields_verbose.items():
             with self.subTest(field=field):
-                self.assertEquals(self.article._meta.get_field(field).verbose_name,
-                                  expected_value)
+                self.assertEquals(
+                    self.article._meta.get_field(field).verbose_name,
+                    expected_value,
+                )
 
     def test_category_verbose_name(self):
         """Check verbose_name in Category model."""
@@ -114,4 +133,6 @@ class ModelTests(TestCase):
 
     def test_get_absolute_url_article(self):
         """Check get_absolute_url in Article model."""
-        self.assertEquals(self.article.get_absolute_url(), '/article_detail/2/')
+        self.assertEquals(
+            self.article.get_absolute_url(), '/article_detail/2/'
+        )

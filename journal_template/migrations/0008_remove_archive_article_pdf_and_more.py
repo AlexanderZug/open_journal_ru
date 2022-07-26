@@ -30,29 +30,49 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='article',
             name='article_pdf',
-            field=models.FileField(default=1, upload_to='issue_pdf/', verbose_name='pdf-файл статьи'),
+            field=models.FileField(
+                default=1,
+                upload_to='issue_pdf/',
+                verbose_name='pdf-файл статьи',
+            ),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='article',
             name='article_title',
-            field=models.CharField(default=1, max_length=300, verbose_name='название статьи'),
+            field=models.CharField(
+                default=1, max_length=300, verbose_name='название статьи'
+            ),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='article',
             name='author',
-            field=models.CharField(default=1, max_length=200, verbose_name='имя автора'),
+            field=models.CharField(
+                default=1, max_length=200, verbose_name='имя автора'
+            ),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='article',
             name='category',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='categories', to='journal_template.category', verbose_name='категория (опционально)'),
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name='categories',
+                to='journal_template.category',
+                verbose_name='категория (опционально)',
+            ),
         ),
         migrations.AlterField(
             model_name='archive',
             name='article',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='articles', to='journal_template.article', verbose_name='статья|автор статьи'),
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name='articles',
+                to='journal_template.article',
+                verbose_name='статья|автор статьи',
+            ),
         ),
     ]

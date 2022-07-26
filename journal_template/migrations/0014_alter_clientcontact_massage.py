@@ -6,7 +6,10 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('journal_template', '0013_remove_about_client_contact_clientcontact_massage'),
+        (
+            'journal_template',
+            '0013_remove_about_client_contact_clientcontact_massage',
+        ),
     ]
 
     operations = [
