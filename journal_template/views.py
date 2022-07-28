@@ -13,6 +13,11 @@ class IndexView(ListView):
     context_object_name = 'page_obj'
     extra_context = {'title': 'index'}
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['last_number'] = Archive.objects.order_by('-publish_date').first()
+        return context
+
 
 class InformationView(CreateView):
     form_class = ClientContactForm
