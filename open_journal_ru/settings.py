@@ -36,6 +36,7 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     'journal_template.apps.JournalTemplateConfig',
+    'api.apps.ApiConfig',
     'colorfield',
     'django.contrib.admin',
     'django.contrib.auth',

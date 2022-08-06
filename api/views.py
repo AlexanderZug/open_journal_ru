@@ -1,8 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 
 from api.serializers import InformationPageSerializer
-
-
 from journal_template.models import InformationPage
 
 
