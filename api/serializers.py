@@ -6,10 +6,12 @@ from journal_template.models import Archive, Article, ClientContact
 class ClientContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClientContact
-        fields = 'name', 'surname', 'email', 'massage'
+        fields = ('name', 'surname', 'email', 'massage',)
 
 
 class ArticleSerializer(serializers.ModelSerializer):
+    category = serializers.StringRelatedField(read_only=True)
+
     class Meta:
         model = Article
         fields = (
@@ -25,6 +27,8 @@ class ArticleSerializer(serializers.ModelSerializer):
 
 
 class ArchiveSerializer(serializers.ModelSerializer):
+    article = serializers.StringRelatedField(read_only=True)
+
     class Meta:
         model = Archive
         fields = (
