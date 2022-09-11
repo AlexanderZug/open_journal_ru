@@ -8,3 +8,4 @@ Pillow==9.1.1
 sorl-thumbnail==12.8.0
 sqlparse==0.4.2
 djangorestframework==3.12.4
+drf-yasg==1.21.3
