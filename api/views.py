@@ -1,5 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 
+from api.permissions import AdminOrReadOnly
 from api.serializers import (
     ArchiveSerializer,
     ArticleSerializer,
@@ -16,8 +17,10 @@ class ClientContactViewSet(ModelViewSet):
 class ArticleViewSet(ModelViewSet):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
+    permission_classes = (AdminOrReadOnly,)
 
 
 class ArchiveViewSet(ModelViewSet):
     queryset = Archive.objects.all()
     serializer_class = ArchiveSerializer
+    permission_classes = (AdminOrReadOnly,)
