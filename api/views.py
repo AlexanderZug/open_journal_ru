@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 
-from api.permissions import AdminOrReadOnly
+from api.permissions import AdminOrReadOnly, CreateOrReadOnly
 from api.serializers import (
     ArchiveSerializer,
     ArticleSerializer,
@@ -12,6 +12,7 @@ from journal_template.models import Archive, Article, ClientContact
 class ClientContactViewSet(ModelViewSet):
     queryset = ClientContact.objects.all()
     serializer_class = ClientContactSerializer
+    permission_classes = (CreateOrReadOnly,)
 
 
 class ArticleViewSet(ModelViewSet):
